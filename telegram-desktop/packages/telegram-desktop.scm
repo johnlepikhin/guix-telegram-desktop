@@ -105,7 +105,9 @@
        (base32
         "1fsvc0f8mckrdzys8lnlnbw6676mjamm6p3ghr2h9liqfa83s6wg")))))
 
-;; Use relative path instead of current-filename for channel compatibility
+;; Function to get patch path for channel compatibility
+(define (channel-patch name)
+  (local-file (string-append "patches/" name)))
 
 (define cppgir-for-telegram-desktop
   (origin
@@ -140,7 +142,7 @@
     (file-name
      (git-file-name "cmake-helpers-for-telegram-desktop" %telegram-version))
     (patches
-     (list (local-file "../../patches/telegram-desktop-unbundle-cppgir-v2.patch")))
+     (list (channel-patch "telegram-desktop-unbundle-cppgir-v2.patch")))
     (sha256
      (base32
       "1lzh5jlxss0p5n28d29y86z7pzlvmcq1kg9ijyrvm059xx08n1ri"))))
@@ -572,6 +574,7 @@ secure group calls with end-to-end encryption.")
     (arguments
      (list #:qtbase qtbase
            #:tests? #f                      ; No target
+           #:build-type "Release"           ; Reduce memory requirements
            #:imported-modules
            `(,@%qt-build-system-modules
              (guix build glib-or-gtk-build-system))
@@ -583,10 +586,6 @@ secure group calls with end-to-end encryption.")
              (ice-9 match))
            #:configure-flags
            #~(list
-              ;; Do not generate the debug symbols to reduce link time memory
-              ;; requirements from 25 GiB to 1.3 GiB.  This also nearly halves
-              ;; the build time.
-              "-DCMAKE_BUILD_TYPE=Release"
               ;; Client applications must provide their own API-ID and API-HASH,
               ;; see also <https://core.telegram.org/api/obtaining_api_id>.
               ;; Here, we snarf the keys from the official Snaps, which are
@@ -633,15 +632,19 @@ secure group calls with end-to-end encryption.")
                (add-after 'unpack-additional-sources 'setup-expected-lite-for-cppgir
                  (lambda _
                    ;; cppgir needs expected-lite, provide it from system package
-                   (let ((expected-lite-include (string-append #$(this-package-input "expected-lite") "/include")))
-                     (copy-recursively expected-lite-include "cmake/external/glib/cppgir/expected-lite/include"))))
+                   (let ((expected-lite-include
+                          (string-append #$(this-package-input "expected-lite")
+                                         "/include")))
+                     (copy-recursively expected-lite-include
+                                       "cmake/external/glib/cppgir/expected-lite/include"))))
                (add-after 'unpack-additional-sources 'use-system-xdg-desktop-portal
                  (lambda _
                    (substitute* (list "Telegram/CMakeLists.txt"
                                       "Telegram/lib_base/CMakeLists.txt")
                      (("\\$\\{third_party_loc\\}/xdg-desktop-portal/data")
-                      (string-append #$(this-package-native-input "xdg-desktop-portal")
-                                     "/share/dbus-1/interfaces")))))
+                      (string-append
+                       #$(this-package-native-input "xdg-desktop-portal")
+                       "/share/dbus-1/interfaces")))))
                ;; Remove a problematic 'constexpr' keyword, otherwise
                ;; compilation fails with GCC 11.
                (add-after 'use-system-xdg-desktop-portal 'patch-libwebview
