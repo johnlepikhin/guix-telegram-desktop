@@ -722,6 +722,3 @@ Telegram instant messenger.")
       license:lgpl3
       ;; Others
       license:gpl3+))))
-
-;; Return the package for guix build -f
-telegram-desktop

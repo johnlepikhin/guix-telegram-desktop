@@ -12,6 +12,7 @@ Add this channel to your `~/.config/guix/channels.scm`:
 ```scheme
 (cons* (channel
         (name 'telegram-desktop)
+        (branch "main")
         (url "https://github.com/johnlepikhin/guix-telegram-desktop"))
        %default-channels)
 ```
