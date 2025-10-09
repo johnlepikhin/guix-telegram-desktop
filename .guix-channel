@@ -1,0 +1,9 @@
+;; Introduction of the Telegram Desktop channel.
+
+(channel
+  (version 0)
+  (dependencies
+   (channel
+    (name guix)
+    (url "https://git.savannah.gnu.org/git/guix.git")
+    (minimum-guix "1.4.0"))))
