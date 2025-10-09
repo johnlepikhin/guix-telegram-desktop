@@ -1,5 +1,4 @@
 ;;; GNU Guix --- Functional package management for GNU
-;;; Copyright © 2025 Evgenii Lepikhin <johnlepikhin@gmail.com>
 ;;; Copyright © 2021 Raghav Gururajan <rg@raghavgururajan.name>
 ;;; Copyright © 2022, 2023 Hilton Chain <hako@ultrarare.space>
 ;;; Copyright © 2023 Saku Laesvuori <saku@laesvuori.fi>
@@ -9,6 +8,7 @@
 ;;; Copyright © 2024 dan <i@dan.games>
 ;;; Copyright © 2025 Sharlatan Hellseher <sharlatanus@gmail.com>
 ;;; Copyright © 2025 Zheng Junjie <z572@z572.online>
+;;; Copyright © 2025 Evgenii Lepikhin <johnlepikhin@gmail.com>
 ;;;
 ;;; This file is part of GNU Guix.
 ;;;
