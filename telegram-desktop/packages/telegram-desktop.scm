@@ -105,7 +105,7 @@
        (base32
         "1fsvc0f8mckrdzys8lnlnbw6676mjamm6p3ghr2h9liqfa83s6wg")))))
 
-(define %source-dir (dirname (current-filename)))
+;; Use relative path instead of current-filename for channel compatibility
 
 (define cppgir-for-telegram-desktop
   (origin
@@ -140,7 +140,7 @@
     (file-name
      (git-file-name "cmake-helpers-for-telegram-desktop" %telegram-version))
     (patches
-     (list (local-file (string-append (dirname (dirname %source-dir)) "/patches/telegram-desktop-unbundle-cppgir-v2.patch"))))
+     (list (local-file "../../patches/telegram-desktop-unbundle-cppgir-v2.patch")))
     (sha256
      (base32
       "1lzh5jlxss0p5n28d29y86z7pzlvmcq1kg9ijyrvm059xx08n1ri"))))
