@@ -521,9 +521,9 @@ and not propagated to upstream.")
     (build-system cmake-build-system)
     (arguments
      (list #:tests? #f  ; No tests in E2E-only mode
+           #:build-type "Release"           ; Reduce memory requirements
            #:configure-flags
-           #~(list "-DCMAKE_BUILD_TYPE=Release"
-                   "-DTD_E2E_ONLY=ON")))
+           #~(list "-DTD_E2E_ONLY=ON")))
     (native-inputs
      (list gperf))
     (inputs
@@ -536,9 +536,9 @@ applications, extracted from the TDLib project.  This library enables
 secure group calls with end-to-end encryption.")
     (license license:boost1.0)))
 
-(define-public telegram-desktop
+(define-public telegram-desktop-next
   (package
-    (name "telegram-desktop")
+    (name "telegram-desktop-next")
     (version %telegram-version)
     (source
      (origin
@@ -626,7 +626,8 @@ secure group calls with end-to-end encryption.")
                       ("Telegram/ThirdParty/fcitx5-qt" #$fcitx5-qt-for-telegram-desktop)
                       ("Telegram/ThirdParty/libprisma" #$libprisma-for-telegram-desktop)
                       ("Telegram/ThirdParty/tgcalls" #$tgcalls-for-telegram-desktop)
-                      ("Telegram/ThirdParty/kimageformats" #$kimageformats-for-telegram-desktop)
+                      ("Telegram/ThirdParty/kimageformats"
+                       #$kimageformats-for-telegram-desktop)
                       ("Telegram/ThirdParty/nimf" #$nimf-for-telegram-desktop)
                       ("Telegram/ThirdParty/hime" #$hime-for-telegram-desktop)))))
                (add-after 'unpack-additional-sources 'setup-expected-lite-for-cppgir
@@ -635,8 +636,9 @@ secure group calls with end-to-end encryption.")
                    (let ((expected-lite-include
                           (string-append #$(this-package-input "expected-lite")
                                          "/include")))
-                     (copy-recursively expected-lite-include
-                                       "cmake/external/glib/cppgir/expected-lite/include"))))
+                     (copy-recursively
+                      expected-lite-include
+                      "cmake/external/glib/cppgir/expected-lite/include"))))
                (add-after 'unpack-additional-sources 'use-system-xdg-desktop-portal
                  (lambda _
                    (substitute* (list "Telegram/CMakeLists.txt"
@@ -718,7 +720,7 @@ secure group calls with end-to-end encryption.")
     (synopsis "Telegram Desktop")
     (description "Telegram desktop is the official desktop version of the
 Telegram instant messenger.")
-    (home-page "https://desktop.telegram.org/")
+    (home-page "https://github.com/telegramdesktop/tdesktop")
     (license
      (list
       ;; ThirdParty
