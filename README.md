@@ -13,12 +13,10 @@ Add this channel to your `~/.config/guix/channels.scm`:
 (cons* (channel
         (name 'telegram-desktop)
         (branch "main")
+        ;; or
+        (commit "v6.1.4")
         (url "https://github.com/johnlepikhin/guix-telegram-desktop"))
        %default-channels)
 ```
 
 Then install with: `guix install telegram-desktop`
-
-## Status
-
-Work in progress - building a fully functional Telegram Desktop package from source.
