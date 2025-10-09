@@ -105,10 +105,6 @@
        (base32
         "1fsvc0f8mckrdzys8lnlnbw6676mjamm6p3ghr2h9liqfa83s6wg")))))
 
-;; Function to get patch path for channel compatibility
-(define (channel-patch name)
-  (local-file (string-append "patches/" name)))
-
 (define cppgir-for-telegram-desktop
   (origin
     (method git-fetch)
@@ -142,7 +138,7 @@
     (file-name
      (git-file-name "cmake-helpers-for-telegram-desktop" %telegram-version))
     (patches
-     (list (channel-patch "telegram-desktop-unbundle-cppgir-v2.patch")))
+     (search-patches "telegram-desktop-unbundle-cppgir-v2.patch"))
     (sha256
      (base32
       "1lzh5jlxss0p5n28d29y86z7pzlvmcq1kg9ijyrvm059xx08n1ri"))))
