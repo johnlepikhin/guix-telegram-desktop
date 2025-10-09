@@ -536,9 +536,9 @@ applications, extracted from the TDLib project.  This library enables
 secure group calls with end-to-end encryption.")
     (license license:boost1.0)))
 
-(define-public telegram-desktop-next
+(define-public telegram-desktop
   (package
-    (name "telegram-desktop-next")
+    (name "telegram-desktop")
     (version %telegram-version)
     (source
      (origin
