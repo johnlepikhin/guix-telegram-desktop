@@ -138,7 +138,12 @@
     (file-name
      (git-file-name "cmake-helpers-for-telegram-desktop" %telegram-version))
     (patches
-     (search-patches "telegram-desktop-unbundle-cppgir-v2.patch"))
+     (map (lambda (patch)
+            (search-path
+             (map (cut string-append <> "/telegram-desktop/packages/patches")
+                  %load-path)
+             patch))
+          '("telegram-desktop-unbundle-cppgir-v2.patch")))
     (sha256
      (base32
       "1lzh5jlxss0p5n28d29y86z7pzlvmcq1kg9ijyrvm059xx08n1ri"))))
@@ -248,7 +253,12 @@
     (file-name
      (git-file-name "lib-tl-for-telegram-desktop" %telegram-version))
     (patches
-     (search-patches "lib-tl-for-telegram-memcpy.patch"))
+     (map (lambda (patch)
+            (search-path
+             (map (cut string-append <> "/telegram-desktop/packages/patches")
+                  %load-path)
+             patch))
+          '("lib-tl-for-telegram-memcpy.patch")))
     (sha256
      (base32
       "18vfjwv5h0j8a7lw1qcrsl16kbnnfjhgb7ay6ibi433kbddbdw5l"))))
@@ -549,10 +559,14 @@ secure group calls with end-to-end encryption.")
        (sha256
         (base32 "0v3vp5bmaayrpipaxnf45qav84hm5smp810xq2gw1c3ipbqvxhdr"))
        (patches
-        (search-patches
-         ;; Make it compatible with GCC 11.
-         "telegram-desktop-qguiapp.patch"
-         "telegram-desktop-hashmap-incomplete-value.patch"))
+        (map (lambda (patch)
+               (search-path
+                (map (cut string-append <> "/telegram-desktop/packages/patches")
+                     %load-path)
+                patch))
+             '(;; Make it compatible with GCC 11.
+               "telegram-desktop-qguiapp.patch"
+               "telegram-desktop-hashmap-incomplete-value.patch")))
        (modules '((guix build utils)
                   (ice-9 ftw)
                   (srfi srfi-1)))
