@@ -89,7 +89,7 @@
   #:use-module (guix build-system python)
   #:use-module (guix build-system qt))
 
-(define %telegram-version "6.1.4")
+(define %telegram-version "6.2.2")
 
 (define libyuv-for-telegram-desktop
   (let ((commit "04821d1e7d60845525e8db55c7bcd41ef5be9406")
@@ -154,12 +154,12 @@
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/codegen.git")
-          (commit "0d0d71af1058f0c4e9d9c9971f5c66331e6055af")))
+          (commit "7576bcd417d51b5d99ed1401d099a924fcf99237")))
     (file-name
      (git-file-name "codegen-for-telegram-desktop" %telegram-version))
     (sha256
      (base32
-      "13anfp6b7dna2i1qy1cy5bbsq3wif182mbyrk5h0w29559992v0g"))))
+      "1wj39mj5ar3f4famjp53ggkcajww8j6hgl36c77vjn68vm4sfx03"))))
 
 (define lib-base-for-telegram-desktop
   (origin
@@ -558,7 +558,7 @@ secure group calls with end-to-end encryption.")
        (file-name
         (git-file-name name version))
        (sha256
-        (base32 "0v3vp5bmaayrpipaxnf45qav84hm5smp810xq2gw1c3ipbqvxhdr"))
+        (base32 "07rqrnsgxgkfs4ld7m0ggg99a2yi63i5zpvxdy5vgmn4q0znlkq6"))
        (patches
         (map (lambda (patch)
                (search-path
