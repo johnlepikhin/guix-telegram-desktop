@@ -89,7 +89,7 @@
   #:use-module (guix build-system python)
   #:use-module (guix build-system qt))
 
-(define %telegram-version "6.2.2")
+(define %telegram-version "6.2.3")
 
 (define libyuv-for-telegram-desktop
   (let ((commit "04821d1e7d60845525e8db55c7bcd41ef5be9406")
@@ -558,7 +558,7 @@ secure group calls with end-to-end encryption.")
        (file-name
         (git-file-name name version))
        (sha256
-        (base32 "07rqrnsgxgkfs4ld7m0ggg99a2yi63i5zpvxdy5vgmn4q0znlkq6"))
+        (base32 "1p0mmivz48ab56qfc661l20p1gp1zk4rndaqv8zi7vzq3i5m6z8f"))
        (patches
         (map (lambda (patch)
                (search-path
