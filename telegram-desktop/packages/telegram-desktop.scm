@@ -89,7 +89,7 @@
   #:use-module (guix build-system python)
   #:use-module (guix build-system qt))
 
-(define %telegram-version "6.2.3")
+(define %telegram-version "6.2.4")
 
 (define libyuv-for-telegram-desktop
   (let ((commit "04821d1e7d60845525e8db55c7bcd41ef5be9406")
@@ -269,12 +269,12 @@
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/lib_ui.git")
-          (commit "ba1417299f64133b98397a28164f969004e5ca72")))
+          (commit "bfbb6e0f9baf571e20f9ab3d06211254cdc1a5b1")))
     (file-name
      (git-file-name "lib-ui-for-telegram-desktop" %telegram-version))
     (sha256
      (base32
-      "010jppvayxzxkg3dcx5alwia64ciw2xqvyvn6ydgcfj4157h6vch"))))
+      "1kmw669y3j34fr1s266lf2bi82ng1gjkdm96zr0iqffzx3kw5i0w"))))
 
 (define lib-webrtc-for-telegram-desktop
   (origin
@@ -558,7 +558,7 @@ secure group calls with end-to-end encryption.")
        (file-name
         (git-file-name name version))
        (sha256
-        (base32 "1p0mmivz48ab56qfc661l20p1gp1zk4rndaqv8zi7vzq3i5m6z8f"))
+        (base32 "0b5cakha4f6vcl0kzvs60qlmlix6v9db8hfgfaz437wjhbccfg1s"))
        (patches
         (map (lambda (patch)
                (search-path
