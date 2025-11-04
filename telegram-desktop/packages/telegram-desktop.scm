@@ -89,7 +89,7 @@
   #:use-module (guix build-system python)
   #:use-module (guix build-system qt))
 
-(define %telegram-version "6.2.4")
+(define %telegram-version "6.2.5")
 
 (define libyuv-for-telegram-desktop
   (let ((commit "04821d1e7d60845525e8db55c7bcd41ef5be9406")
@@ -135,7 +135,7 @@
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/cmake_helpers.git")
-          (commit "c7e0493dea2b870fb1b8e26604201fdb9e8c1ee5")))
+          (commit "13516177a1270ebd45c0da4fcaffcb710bfbe0b0")))
     (file-name
      (git-file-name "cmake-helpers-for-telegram-desktop" %telegram-version))
     (patches
@@ -147,31 +147,31 @@
           '("telegram-desktop-unbundle-cppgir-v2.patch")))
     (sha256
      (base32
-      "1lzh5jlxss0p5n28d29y86z7pzlvmcq1kg9ijyrvm059xx08n1ri"))))
+      "0a5a2zx47kisjhqhaav17b7d8c5d56k2fj42nc9c21g5zb8xh1is"))))
 
 (define codegen-for-telegram-desktop
   (origin
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/codegen.git")
-          (commit "7576bcd417d51b5d99ed1401d099a924fcf99237")))
+          (commit "9bb72708a77f81fad273a30292813def062fbb9d")))
     (file-name
      (git-file-name "codegen-for-telegram-desktop" %telegram-version))
     (sha256
      (base32
-      "1wj39mj5ar3f4famjp53ggkcajww8j6hgl36c77vjn68vm4sfx03"))))
+      "0p8615n1rr9g6n333m9v4r60xc84pd47n3c6nyfljhi6gszx4d1k"))))
 
 (define lib-base-for-telegram-desktop
   (origin
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/lib_base.git")
-          (commit "42b01c4726b25bb09bf16ad4d1503a7875483519")))
+          (commit "d6c40c834a5b33cb3bad6eab25b0ea9e22f48fe5")))
     (file-name
      (git-file-name "lib-base-for-telegram-desktop" %telegram-version))
     (sha256
      (base32
-      "0z9sl55f3kj7pzqq27d6wb5nazfffhvninriy1cy8qc2mghmym3b"))))
+      "18pj4c7l86bbs23c3n54p5vn97bbzm7s5bqwrvwhkg33rxj3pyng"))))
 
 (define lib-crl-for-telegram-desktop
   (origin
@@ -269,12 +269,12 @@
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/lib_ui.git")
-          (commit "bfbb6e0f9baf571e20f9ab3d06211254cdc1a5b1")))
+          (commit "9aaa2d963f5d20cfbb43f52844d435923a160289")))
     (file-name
      (git-file-name "lib-ui-for-telegram-desktop" %telegram-version))
     (sha256
      (base32
-      "1kmw669y3j34fr1s266lf2bi82ng1gjkdm96zr0iqffzx3kw5i0w"))))
+      "1qsz5psm761bwma17avhsnb2gmzzdw4lbcl72b8nw0spc6z7m3d8"))))
 
 (define lib-webrtc-for-telegram-desktop
   (origin
@@ -558,7 +558,7 @@ secure group calls with end-to-end encryption.")
        (file-name
         (git-file-name name version))
        (sha256
-        (base32 "0b5cakha4f6vcl0kzvs60qlmlix6v9db8hfgfaz437wjhbccfg1s"))
+        (base32 "1ljd6y6i24xayy0x0a0nzxqp1jsrrpa5s6hp7y995dl77jq4n96r"))
        (patches
         (map (lambda (patch)
                (search-path
@@ -567,7 +567,9 @@ secure group calls with end-to-end encryption.")
                 patch))
              '(;; Make it compatible with GCC 11.
                "telegram-desktop-qguiapp.patch"
-               "telegram-desktop-hashmap-incomplete-value.patch")))
+               "telegram-desktop-hashmap-incomplete-value.patch"
+               ;; Fix LaunchMaps for xdg-desktop-portal < 1.19.1
+               "telegram-desktop-fix-launch-maps.patch")))
        (modules '((guix build utils)
                   (ice-9 ftw)
                   (srfi srfi-1)))

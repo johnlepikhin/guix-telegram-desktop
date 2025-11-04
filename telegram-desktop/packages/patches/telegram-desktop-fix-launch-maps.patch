@@ -1,0 +1,58 @@
+Fix LaunchMaps to work with xdg-desktop-portal < 1.19.1
+
+The call_scheme_supported method was added in xdg-desktop-portal 1.19.1.
+For compatibility with older versions, we skip the scheme support check
+and directly attempt to open the URL.
+
+--- a/Telegram/SourceFiles/platform/linux/specific_linux.cpp
++++ b/Telegram/SourceFiles/platform/linux/specific_linux.cpp
+@@ -800,39 +800,11 @@ void LaunchMaps(const Data::LocationPoint &point, Fn<void()> fail) {
+ 	}
+
+-	XdpOpenURI::OpenURIProxy::new_for_bus(
+-		Gio::BusType::SESSION_,
+-		Gio::DBusProxyFlags::NONE_,
+-		base::Platform::XDP::kService,
+-		base::Platform::XDP::kObjectPath,
+-		[=](GObject::Object, Gio::AsyncResult res) {
+-			auto interface = XdpOpenURI::OpenURI(
+-				XdpOpenURI::OpenURIProxy::new_for_bus_finish(res, nullptr));
+-
+-			if (!interface) {
+-				fail();
+-				return;
+-			}
+-
+-			interface.call_scheme_supported(
+-				"geo",
+-				GLib::Variant::new_array(
+-					GLib::VariantType::new_("{sv}"),
+-					{}),
+-				[=](GObject::Object, Gio::AsyncResult res) mutable {
+-					const auto result
+-						= interface.call_scheme_supported_finish(res);
+-
+-					if (!result || !std::get<1>(*result)) {
+-						fail();
+-						return;
+-					}
+-
+-					if (!QDesktopServices::openUrl(
+-						u"geo:%1,%2"_q.arg(
+-							point.latAsString(),
+-							point.lonAsString()))) {
+-						fail();
+-					}
+-				});
+-		});
++	// Directly try to open URL without checking scheme support
++	// (requires xdg-desktop-portal >= 1.19.1 for call_scheme_supported)
++	if (!QDesktopServices::openUrl(
++		u"geo:%1,%2"_q.arg(
++			point.latAsString(),
++			point.lonAsString()))) {
++		fail();
++	}
+ }
+
+ namespace ThirdParty {
