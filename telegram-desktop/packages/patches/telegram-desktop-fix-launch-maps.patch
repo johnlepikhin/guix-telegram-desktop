@@ -6,9 +6,10 @@ and directly attempt to open the URL.
 
 --- a/Telegram/SourceFiles/platform/linux/specific_linux.cpp
 +++ b/Telegram/SourceFiles/platform/linux/specific_linux.cpp
-@@ -800,39 +800,11 @@ void LaunchMaps(const Data::LocationPoint &point, Fn<void()> fail) {
- 	}
-
+@@ -544,37 +544,9 @@
+ 		const std::string &scheme,
+ 		Fn<void(Fn<void()>)> callback,
+ 		Fn<void()> fail) {
 -	XdpOpenURI::OpenURIProxy::new_for_bus(
 -		Gio::BusType::SESSION_,
 -		Gio::DBusProxyFlags::NONE_,
@@ -24,7 +25,7 @@ and directly attempt to open the URL.
 -			}
 -
 -			interface.call_scheme_supported(
--				"geo",
+-				scheme,
 -				GLib::Variant::new_array(
 -					GLib::VariantType::new_("{sv}"),
 -					{}),
@@ -37,22 +38,12 @@ and directly attempt to open the URL.
 -						return;
 -					}
 -
--					if (!QDesktopServices::openUrl(
--						u"geo:%1,%2"_q.arg(
--							point.latAsString(),
--							point.lonAsString()))) {
--						fail();
--					}
+-					callback(fail);
 -				});
 -		});
 +	// Directly try to open URL without checking scheme support
 +	// (requires xdg-desktop-portal >= 1.19.1 for call_scheme_supported)
-+	if (!QDesktopServices::openUrl(
-+		u"geo:%1,%2"_q.arg(
-+			point.latAsString(),
-+			point.lonAsString()))) {
-+		fail();
-+	}
++	callback(fail);
  }
 
- namespace ThirdParty {
+ } // namespace
