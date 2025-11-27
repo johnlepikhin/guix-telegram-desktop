@@ -89,7 +89,7 @@
   #:use-module (guix build-system python)
   #:use-module (guix build-system qt))
 
-(define %telegram-version "6.3.1")
+(define %telegram-version "6.3.4")
 
 (define libyuv-for-telegram-desktop
   (let ((commit "04821d1e7d60845525e8db55c7bcd41ef5be9406")
@@ -269,12 +269,12 @@
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/lib_ui.git")
-          (commit "6c262952308908151e7cc9c40f65997f6b2ff65e")))
+          (commit "2d9a1e79590cc3229b4396f3b4df8652cc681bf3")))
     (file-name
      (git-file-name "lib-ui-for-telegram-desktop" %telegram-version))
     (sha256
      (base32
-      "1irqvfhc9kgq4n5a3b7df7kihwgnda6z4p5mgpwcqxfqqa9nj7zi"))))
+      "0zddwkb45qpmawdcs1b0v188vi0qjricwn4fbnrh71vcvpri6g3y"))))
 
 (define lib-webrtc-for-telegram-desktop
   (origin
@@ -305,12 +305,12 @@
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/TelegramMessenger/tgcalls.git")
-          (commit "24694f64b03e301ec2c90792566046e61a2c4967")))
+          (commit "24876ebca7da10f92dc972225734337f9e793054")))
     (file-name
      (git-file-name "tgcalls-for-telegram-desktop" %telegram-version))
     (sha256
      (base32
-      "0b4q0wadx906i4b3xm1qqyd2mr9svmm6zgmvsg7fv5sz1l4c5hpn"))))
+      "1v33nsggz8fk3bnky9di5ggi8jc96y8yfrxf3pjvw239qfi3m9lz"))))
 
 (define fcitx5-qt-for-telegram-desktop
   (origin
@@ -558,7 +558,7 @@ secure group calls with end-to-end encryption.")
        (file-name
         (git-file-name name version))
        (sha256
-        (base32 "0wgl7n4z6086pmvp5sfjcv11bdjiik3jnphd8a52q4j1vsnz3qsj"))
+        (base32 "1acgb9dbz1m5hwm42bmxq2wx754v3kp6l36xx4j1p9gh57pd8vlb"))
        (patches
         (map (lambda (patch)
                (search-path
