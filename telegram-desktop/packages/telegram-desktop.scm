@@ -87,7 +87,20 @@
   #:use-module (guix build-system gnu)
   #:use-module (guix build-system meson)
   #:use-module (guix build-system python)
-  #:use-module (guix build-system qt))
+  #:use-module (guix build-system qt)
+  #:use-module (guix utils))
+
+;; Use abseil-cpp-20250127 because the latest version (20250814) removed
+;; template-based absl::Nonnull which is required by tg_owt.
+;; The newer abseil replaced it with macros which are not compatible.
+(define abseil-cpp-cxxstd17-compat
+  (hidden-package
+   (package/inherit abseil-cpp-20250127
+     (arguments
+      (substitute-keyword-arguments (package-arguments abseil-cpp-20250127)
+        ((#:configure-flags flags #~'())
+         #~(cons* "-DCMAKE_CXX_STANDARD=17"
+                  #$flags)))))))
 
 (define %telegram-version "6.3.4")
 
@@ -376,7 +389,7 @@
                                      libyuv-to)))))))
        (native-inputs (list pkg-config python-wrapper yasm))
        (inputs
-        (list abseil-cpp-cxxstd17
+        (list abseil-cpp-cxxstd17-compat
               crc32c
               ffmpeg
               glib
@@ -686,7 +699,7 @@ secure group calls with end-to-end encryption.")
            python-wrapper
            xdg-desktop-portal))
     (inputs
-     (list abseil-cpp-cxxstd17
+     (list abseil-cpp-cxxstd17-compat
            alsa-lib
            boost
            c++-gsl
