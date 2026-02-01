@@ -102,7 +102,7 @@
          #~(cons* "-DCMAKE_CXX_STANDARD=17"
                   #$flags)))))))
 
-(define %telegram-version "6.3.9")
+(define %telegram-version "6.4.4")
 
 (define libyuv-for-telegram-desktop
   (let ((commit "04821d1e7d60845525e8db55c7bcd41ef5be9406")
@@ -148,7 +148,7 @@
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/cmake_helpers.git")
-          (commit "ba366ade3e70c64d1dd854382abd74f532ba41a1")))
+          (commit "9513cecbca8ee41c07c7d946625bda356e00e2f6")))
     (file-name
      (git-file-name "cmake-helpers-for-telegram-desktop" %telegram-version))
     (patches
@@ -160,7 +160,7 @@
           '("telegram-desktop-unbundle-cppgir-v2.patch")))
     (sha256
      (base32
-      "0pkhs6mvsbf4k3cdyfk36k2r7v5ma0gd9dv9blpfs6lcm4s73lz2"))))
+      "1xbd8r2r0byp88q7fdkjx608mp5hkwgnapjs9paqy0lvdsirrwcv"))))
 
 (define codegen-for-telegram-desktop
   (origin
@@ -179,12 +179,12 @@
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/lib_base.git")
-          (commit "444ab33475734485dcc183a5fb86875c134fac8b")))
+          (commit "cca87bd2fb4f83bb3fc45d8b59ed8f1d9429d78b")))
     (file-name
      (git-file-name "lib-base-for-telegram-desktop" %telegram-version))
     (sha256
      (base32
-      "076b8b2g52nh1ncqdw3n8zs89dxiziq812ld8icmamyv5ksvj3yq"))))
+      "10zdgnwb9k6y1jsicjq829gbgflkciwklzhmr6fi99c52b8snm5b"))))
 
 (define lib-crl-for-telegram-desktop
   (origin
@@ -203,12 +203,12 @@
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/lib_lottie.git")
-          (commit "99d8cc4d1820960fbcdafc574f1894073b14b75a")))
+          (commit "cba5d113eb941c3eec20c4d171ff4ff9d1a92382")))
     (file-name
      (git-file-name "lib-lottie-for-telegram-desktop" %telegram-version))
     (sha256
      (base32
-      "1kxzr4ifdw64k4lzca8avxb5grdz6gslbwipjbfhiqwc31i5ybfr"))))
+      "0w6w80y3f4fbshl6q344g0iv51hfbj9f5rvygksqp1619izz44yn"))))
 
 (define lib-qr-for-telegram-desktop
   (origin
@@ -263,7 +263,7 @@
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/lib_tl.git")
-          (commit "783052514ea6bd9ed0b7ddb4e5adb8c0077e5b9a")))
+          (commit "ba165de0c82be118e66310a94f114a3e342bcadb")))
     (file-name
      (git-file-name "lib-tl-for-telegram-desktop" %telegram-version))
     (patches
@@ -275,19 +275,19 @@
           '("lib-tl-for-telegram-memcpy.patch")))
     (sha256
      (base32
-      "18vfjwv5h0j8a7lw1qcrsl16kbnnfjhgb7ay6ibi433kbddbdw5l"))))
+      "130dklqqa1wi4wydxiyrcggglsy6cnx01la6w83wcj1yrn46iwfh"))))
 
 (define lib-ui-for-telegram-desktop
   (origin
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/lib_ui.git")
-          (commit "b5fcb5b654c10fefbfe7c278d9c796487b432ddf")))
+          (commit "804feb7eb0bf8b7d62bb52fa9516b951c33785fc")))
     (file-name
      (git-file-name "lib-ui-for-telegram-desktop" %telegram-version))
     (sha256
      (base32
-      "1gmpqn733cbpzn5783gw1684ahs5w161gbpk663hfx4ghfpmchsy"))))
+      "1cr6jxpxyxq8fjixl59y8r10vwna6hc4h79xn1j596m256s129wh"))))
 
 (define lib-webrtc-for-telegram-desktop
   (origin
@@ -306,12 +306,12 @@
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/lib_webview.git")
-          (commit "55ea11759711d377216eae6c45dad0bc49b67398")))
+          (commit "b4a0af279bb55e1caeec3d5f82edae699c3ab251")))
     (file-name
      (git-file-name "lib-webview-for-telegram-desktop" %telegram-version))
     (sha256
      (base32
-      "17aga7nmq0fmbbncdyqb6501qz6nkn71wdb9r5db4lsq8xm9albl"))))
+      "038brvfvgkvbswxhds7lw76mm5crccmx48fma8521hmizlwgydmb"))))
 
 (define tgcalls-for-telegram-desktop
   (origin
@@ -571,7 +571,7 @@ secure group calls with end-to-end encryption.")
        (file-name
         (git-file-name name version))
        (sha256
-        (base32 "1jay402d8w7r939dj87v582vwx9bq1yhmclp8ag9dqq0yiar99z4"))
+        (base32 "1r0xn4kgdi9cvsbm33139xc9vy43qarhybfglschfc30za7nsnr3"))
        (patches
         (map (lambda (patch)
                (search-path
