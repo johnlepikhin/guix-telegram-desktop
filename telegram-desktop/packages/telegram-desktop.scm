@@ -102,7 +102,7 @@
          #~(cons* "-DCMAKE_CXX_STANDARD=17"
                   #$flags)))))))
 
-(define %telegram-version "6.4.4")
+(define %telegram-version "6.5.1")
 
 (define libyuv-for-telegram-desktop
   (let ((commit "04821d1e7d60845525e8db55c7bcd41ef5be9406")
@@ -263,7 +263,7 @@
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/lib_tl.git")
-          (commit "ba165de0c82be118e66310a94f114a3e342bcadb")))
+          (commit "665160f91565bab00ecab65df3a17438e91e44ec")))
     (file-name
      (git-file-name "lib-tl-for-telegram-desktop" %telegram-version))
     (patches
@@ -275,19 +275,19 @@
           '("lib-tl-for-telegram-memcpy.patch")))
     (sha256
      (base32
-      "130dklqqa1wi4wydxiyrcggglsy6cnx01la6w83wcj1yrn46iwfh"))))
+      "07dgy93vx0b5q7a879fs30farvdibyllj5hygpzqnqij5hbsc7dn"))))
 
 (define lib-ui-for-telegram-desktop
   (origin
     (method git-fetch)
     (uri (git-reference
           (url "https://github.com/desktop-app/lib_ui.git")
-          (commit "804feb7eb0bf8b7d62bb52fa9516b951c33785fc")))
+          (commit "2eec13dfc59be8722ba120fca2a8c5c5692ea7b8")))
     (file-name
      (git-file-name "lib-ui-for-telegram-desktop" %telegram-version))
     (sha256
      (base32
-      "1cr6jxpxyxq8fjixl59y8r10vwna6hc4h79xn1j596m256s129wh"))))
+      "1x3ch0900fknycqsx917kdq7594rc4g349c2birp9gyx1xag9f9w"))))
 
 (define lib-webrtc-for-telegram-desktop
   (origin
@@ -356,6 +356,13 @@
            (git-file-name name version))
           (sha256
            (base32 "0d1nglf8irxgavw0p1d23wffmzyzbwapnli45ssgmrn1czzri4gw"))
+          (patches
+           (map (lambda (patch)
+                  (search-path
+                   (map (cut string-append <> "/telegram-desktop/packages/patches")
+                        %load-path)
+                   patch))
+                '("webrtc-for-telegram-desktop-pipewire-1.5.patch")))
           (modules '((guix build utils)
                      (ice-9 ftw)
                      (srfi srfi-1)))
@@ -571,7 +578,7 @@ secure group calls with end-to-end encryption.")
        (file-name
         (git-file-name name version))
        (sha256
-        (base32 "1r0xn4kgdi9cvsbm33139xc9vy43qarhybfglschfc30za7nsnr3"))
+        (base32 "1hh5h2f123bhz34qd4a95ck7n3hn9g4066rzb5qa8hmnpndj2yir"))
        (patches
         (map (lambda (patch)
                (search-path
