@@ -17,7 +17,7 @@ diff --git a/Telegram/SourceFiles/dialogs/dialogs_inner_widget.cpp b/Telegram/So
 index 39e047897..9687405aa 100644
 --- a/Telegram/SourceFiles/dialogs/dialogs_inner_widget.cpp
 +++ b/Telegram/SourceFiles/dialogs/dialogs_inner_widget.cpp
-@@ -247,11 +247,6 @@ struct InnerWidget::PeerSearchResult {
+@@ -264,11 +264,6 @@ struct InnerWidget::PeerSearchResult {
  	BasicRow row;
  };
 
@@ -42,9 +42,9 @@ index 2500f43d1..c85c5ce32 100644
 
  namespace style {
  struct DialogRow;
-@@ -226,7 +228,10 @@ private:
- 	struct CollapsedRow;
+@@ -251,7 +253,10 @@ private:
  	struct HashtagResult;
+ 	struct SponsoredSearchResult;
  	struct PeerSearchResult;
 -	struct TagCache;
 +	struct TagCache {
